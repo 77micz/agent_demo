@@ -31,11 +31,16 @@ def compile_to_functions(code_str: str) -> dict:
     # 去除python标识
     code_str = re.sub(r"```python(.*)```", r"\1", code_str, flags=re.DOTALL)
 
+    # 创建临时目录
     with tempfile.TemporaryDirectory() as d:
+        # 模块名
         module_name = f"llm_code_{uuid.uuid4().hex[:8]}"
         py_path = Path(d) / f"{module_name}.py"
+        # 写入代码
         py_path.write_text(code_str, encoding="utf-8")
 
+        # 导入模块
+        logger.info(f"导入模块：{module_name}")
         spec = importlib.util.spec_from_file_location(module_name, py_path)
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
@@ -94,7 +99,6 @@ def save_llm_code(code: str) -> None:
 
     with open(code_file, "w", encoding="utf-8") as f:
         f.write(code)
-    f.write("\n")
 
 
 def remove_function_def(func: str) -> str:

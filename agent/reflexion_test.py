@@ -88,11 +88,9 @@ def get_tool_result(tools, code):
     """
 
     # 如果大模型输出了代码块，先处理代码块
-    funcs=None
+    funcs={}
     if code:
         funcs = compile_to_functions(code)
-        # 注入当前命名空间
-        globals().update(funcs)
 
     result_list = []
     for tool in tools:
