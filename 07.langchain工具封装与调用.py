@@ -11,6 +11,7 @@ from langchain_core.tools import tool
 
 
 
+
 # 定义工具函数
 @tool
 def multiply(a: int, b: int) -> int:
