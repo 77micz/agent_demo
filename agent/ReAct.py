@@ -27,6 +27,7 @@ client = ChatOpenAI(
     api_key=os.getenv("DASHSCOPE_API_KEY"),  # your_api_key
     base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",  # api路径
     timeout=10,  # 超时时间，单位秒，默认10秒，10秒超时
+    max_retries=3,  # 最大重试次数，默认3次
     model_kwargs={"response_format": {"type": "json_object"}}, # 响应格式为json_object
 )
 
