@@ -92,6 +92,7 @@ app = graph.compile()
 # ----------------------------- 执行 -----------------------------
 result = app.invoke({})
 print(result)
+print(type(result))
 
 
 
